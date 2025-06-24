@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -29,15 +30,29 @@ export class LoginComponent {
       this.loginService.login(email, password).subscribe(
         (users) => {
           if (users.length) {
-            alert('Login realizado com sucesso!');
-            this.router.navigate(['/home']); // redireciona para uma rota protegida, por exemplo
+            Swal.fire({
+              icon: 'success',
+              title: 'Login realizado com sucesso!',
+              confirmButtonColor: '#ea1d2c',
+            }).then(() => {
+              this.router.navigate(['/home']);
+            });
           } else {
-            alert('E-mail ou senha inválidos');
+            Swal.fire({
+              icon: 'error',
+              title: 'E-mail ou senha inválidos',
+              confirmButtonColor: '#ea1d2c',
+            });
           }
         },
         (error) => {
-          alert('Erro ao conectar com a API');
           console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro de conexão',
+            text: 'Não foi possível conectar à API.',
+            confirmButtonColor: '#ea1d2c',
+          });
         }
       );
     }
