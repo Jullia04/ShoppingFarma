@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
@@ -11,14 +11,13 @@ export class HomeComponent implements OnInit {
   produtos: Product[] = [];
   categorias: string[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.http.get<Product[]>('https://shopping-farma-api.vercel.app/products')
-      .subscribe((data) => {
-        this.produtos = data;
-        this.categorias = [...new Set(data.map(p => p.category))]; // categorias únicas
-      });
+    this.productService.getAllProducts().subscribe((data) => {
+      this.produtos = data;
+      this.categorias = [...new Set(data.map(p => p.category))];
+    });
   }
 
   produtosPorCategoria(categoria: string): Product[] {
