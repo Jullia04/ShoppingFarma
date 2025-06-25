@@ -1,0 +1,7 @@
+<div class="card">
+  <img [src]="product.image" alt="Imagem do produto" />
+  <h4>{{ product.name }}</h4>
+  <p class="description">{{ product.description }}</p>
+  <strong class="price">R$ {{ product.price | number:'1.2-2' }}</strong>
+  <p>Disponível: {{ product.quantity }}</p>
+</div>
