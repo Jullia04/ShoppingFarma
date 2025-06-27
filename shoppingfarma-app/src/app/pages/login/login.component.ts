@@ -29,7 +29,7 @@ export class LoginComponent {
 
       this.loginService.login(email, password).subscribe(
         (users) => {
-          if (users.length) {
+          if (users) {
             Swal.fire({
               icon: 'success',
               title: 'Login realizado com sucesso!',
