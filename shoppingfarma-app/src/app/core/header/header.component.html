@@ -4,7 +4,7 @@
   <div class="actions">
     <button (click)="listarProdutos()">🧪 Produtos</button>
     <button (click)="abrirCarrinho()">🛒 Carrinho</button>
-    <span class="usuario">👤 {{ usuarioLogado }}</span>
+    <span class="usuario">👤 {{ usuarioLogado?.name }}</span>
     <button (click)="logout()">Sair</button>
   </div>
 </header>

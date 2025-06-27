@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './../../services/login.service';
 import { User } from 'src/app/models/user.model';
@@ -10,7 +11,7 @@ import { User } from 'src/app/models/user.model';
 export class HeaderComponent implements OnInit {
   usuarioLogado: User | null = null;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioLogado = this.loginService.getUsuarioLogado();
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.loginService.logout();
+    this.router.navigate(['/login']);
     console.log('Usuário deslogado');
   }
 
